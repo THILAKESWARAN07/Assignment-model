@@ -1,1 +1,13 @@
+# Environment variables (API Keys)
 .env
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+env/
+
+# Streamlit local config
+.streamlit/
