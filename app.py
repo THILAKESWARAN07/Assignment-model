@@ -1,39 +1,37 @@
 import streamlit as st
 from ai_train import generate_assignment_content
 
-# Page config
-st.set_page_config(page_title="Assignment Generator", layout="centered")
+st.set_page_config(page_title="Assignment Generator", layout="centered", page_icon="🎓")
 
-# UI
 st.title("🎓 AI Assignment Generator")
-st.write("This app uses a logic file to generate your work.")
+st.info("Provide a topic and complexity level to generate a full-length academic assignment.")
 
-topic = st.text_input(
-    "Assignment Topic",
-    placeholder="Enter the topic of your assignment..."
-)
+# Input Section
+col1, col2 = st.columns([2, 1])
 
-level = st.selectbox(
-    "Complexity",
-    ["Undergraduate", "Postgraduate", "PhD"]
-)
+with col1:
+    topic = st.text_input("Assignment Topic", placeholder="e.g., The Impact of Quantum Computing on Cryptography")
 
-if st.button("Generate Assignment"):
+with col2:
+    level = st.selectbox("Complexity Level", ["Undergraduate", "Postgraduate", "PhD"])
+
+# Execution Section
+if st.button("Generate Assignment", use_container_width=True):
     if topic.strip():
-        with st.spinner("Generating assignment..."):
-            try:
-                assignment = generate_assignment_content(topic, level)
-
+        with st.spinner("Writing your assignment... this may take a minute..."):
+            assignment = generate_assignment_content(topic, level)
+            
+            if "Error" in assignment:
+                st.error(assignment)
+            else:
                 st.markdown("---")
                 st.markdown(assignment)
-
+                
                 st.download_button(
-                    label="📥 Download Text",
+                    label="📥 Download Assignment (.txt)",
                     data=assignment,
-                    file_name="assignment.txt",
+                    file_name=f"{topic.replace(' ', '_')}_assignment.txt",
                     mime="text/plain"
                 )
-            except Exception as e:
-                st.error(f"Error generating assignment: {e}")
     else:
-        st.warning("Please enter a topic.")
+        st.warning("Please enter a topic before generating.")
