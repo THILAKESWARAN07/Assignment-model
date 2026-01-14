@@ -13,21 +13,18 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY") or st.secrets.get("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
     raise RuntimeError("GOOGLE_API_KEY not found. Add it to Streamlit Secrets.")
 
-def generate_assignment_content(topic, level, word_limit):
+def generate_assignment_content(topic, level):
     """Handles the AI generation logic separately from the UI."""
 
     llm = ChatGoogleGenerativeAI(
-        model="models/gemini-1.0-pro", 
+        model="gemini-2.5-flash",
         google_api_key=GOOGLE_API_KEY,
         temperature=0.7
     )
 
     system_msg = (
-        f"Write a {level} level academic assignment on the given topic. "
-        f"Use '##' for headings. "
-        f"Each heading MUST have 2–3 long paragraphs. "
-        f"The total length should be approximately {word_limit} words. "
-        f"Maintain a formal and academic tone."
+        f"Write a {level} level assignment. Use '##' for headings. "
+        "Each heading MUST have 2-3 long paragraphs. Be academic and formal."
     )
 
     prompt = ChatPromptTemplate.from_messages([
