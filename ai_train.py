@@ -17,7 +17,7 @@ def generate_assignment_content(topic, level):
 
    # Option A: Gemini 2.5 Flash (Best for speed and cost)
     llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash", 
+    model="gemini-1.5-flash", # Or "gemini-1.5-pro" for higher quality
     google_api_key=GOOGLE_API_KEY,
     temperature=0.7
 )
