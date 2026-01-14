@@ -17,10 +17,10 @@ def generate_assignment_content(topic, level):
 
     # Updated to a currently available model version
     llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash", 
-        google_api_key=GOOGLE_API_KEY,
-        temperature=0.7
-    )
+    model="gemini-1.5-pro", 
+    google_api_key=GOOGLE_API_KEY,
+    temperature=0.7
+)
 
     system_msg = (
         f"You are a professional academic writer. Write a {level} level assignment. "
