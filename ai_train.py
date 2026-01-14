@@ -17,7 +17,7 @@ def generate_assignment_content(topic, level):
     """Handles the AI generation logic separately from the UI."""
 
     llm = ChatGoogleGenerativeAI(
-        model="gemini-1.0-pro",
+        model="gemini-1.5-flash",
         google_api_key=GOOGLE_API_KEY,
         temperature=0.7
     )
