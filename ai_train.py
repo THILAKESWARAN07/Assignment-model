@@ -15,9 +15,9 @@ def generate_assignment_content(topic, level):
     if not GOOGLE_API_KEY:
         return "Error: API Key not found. Please configure it in your environment or Streamlit Secrets."
 
-    # Updated to a currently available model version
+   # Option A: Gemini 2.5 Flash (Best for speed and cost)
     llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-pro", 
+    model="gemini-2.5-flash", 
     google_api_key=GOOGLE_API_KEY,
     temperature=0.7
 )
